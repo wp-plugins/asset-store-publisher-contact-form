@@ -1,0 +1,49 @@
+#asset_store_contact_form td
+{
+	text-align: left;
+}
+
+#asset_store_contact_form textarea
+{
+	text-align: left;
+	width: 100%;
+}
+
+#asset_store_contact_form td.field_name
+{
+	width: 30%;
+}
+
+#asset_store_contact_form
+{
+	border:thick;
+}
+
+#asset_store_contact_form td.spacer
+{
+	width: 5%;
+}
+
+#asset_store_contact_form td.field
+{
+	width: 65%;
+}
+
+#asset_store_contact_form input
+{
+	width: 100%;
+}
+
+.as_send_success
+{
+	width: 100%;
+	background-color:#FFF;
+	border-left:solid 5px #0C3;
+}
+
+.as_send_fail
+{
+	width: 100%;
+	background-color:#FFF;
+	border-left:solid 5px #F00;
+}
