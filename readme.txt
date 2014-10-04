@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: myBadStudios
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=76A3BCV838GKW
-Tags: Unity,AssetStore,form,submit,myBad,Studios
+Tags: Unity,unity3d,videogame,AssetStore,publisher,form,submit,myBad,Studios
 Requires at least: 3.0.1
 Tested up to: 4.0
 Stable tag: trunk
@@ -46,6 +46,9 @@ If this kit has any specific feature it will be listed in the product descriptio
 == Screenshots ==
 
 == Changelog ==
+v1.1
+Now not only verifies the invoice before sending the form but also sends the invoice number and your products on the invoice in the email also so you can verify the product in question is actually on the invoice.
+The initial release also didn't include the name field from the contact form. That has been fixed. All fields are now returned.
 
 == Upgrade Notice ==
 

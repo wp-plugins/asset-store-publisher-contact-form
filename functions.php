@@ -71,7 +71,7 @@ class unity_invoices
 	
 }
 
-function as_validate_form($invoice, $name, $email, $subject, $message)
+function as_validate_form($invoice, $name, $email, $subject, &$message)
 {	
 	if (empty($name)) return "Name is required";
 	if (empty($subject)) return "Subject is required";
@@ -81,17 +81,23 @@ function as_validate_form($invoice, $name, $email, $subject, $message)
 	
 	$invoice = str_replace(' ','',$invoice);
 	$invoice = str_replace(',,',',',$invoice);
-	$invoice_count = count ( explode(',',$invoice) );
+//	$invoice_count = count ( explode(',',$invoice) );
 
 	$invoices = new unity_invoices();
 	$invoices->validate_invoices($invoice);
-	if ($invoices->validated_invoices_count() != $invoice_count) return "One or more invoices were incorrect";
+//	if ($invoices->validated_invoices_count() < $invoice_count) return "One or more invoices were incorrect";
 	foreach($invoices->validated_invoices as $valid_invoice)
 		if ($valid_invoice->refunded) return "Invoice {$valid_invoice->invoice} was refunded!";
 		
+	$message = "$name [ $email ] said:\n\n$message\n\nValid invoices / products provided:";
+
+	foreach($invoices->validated_invoices as $valid_invoice)
+	{
+		$message .= "\n$valid_invoice->invoice: ";
+		$message .= $valid_invoice->package . "\n";
+	}
 	return '';
 }
-
 function as_send_contact_form($invoice, $name, $email, $subject, $message, $form_email)
 {
 	$email = trim($email);
@@ -102,7 +108,7 @@ function as_send_contact_form($invoice, $name, $email, $subject, $message, $form
 	
 	$error = as_validate_form($invoice, $name, $email, $subject, $message);
 	if (!empty($error)) return $error;
-	if (!wp_mail($form_email, $subject, "$name [ $email ] said:\n$message") ) return "The e-mail could not be sent";
+	if (!wp_mail($form_email, $subject, $message) ) return "The e-mail could not be sent";
 	return "";
 }
 
