@@ -49,10 +49,10 @@ class unity_invoices
 		else
 		{
 			$entry = new unity_invoice_data();
-			$entry->date		= $val->purchase_date;
+			$entry->date		= $val->date;
 			$entry->refunded	= !($val->refunded == "No");
-			$entry->invoice		= $val->invoice_no;
-			$entry->package		= $val->package_name;
+			$entry->invoice		= $val->invoice;
+			$entry->package		= $val->package;
 			$this->validated_invoices[] = $entry;
 		}
 	}

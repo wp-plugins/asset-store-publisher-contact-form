@@ -46,6 +46,9 @@ If this kit has any specific feature it will be listed in the product descriptio
 == Screenshots ==
 
 == Changelog ==
+v1.3.1
+Unity changed the field names back so I am undoing the changes from version 1.2
+
 v1.3
 Return address now set to user's address, not your own as defaulted by Wordpress
 Now sends mail as HTML, not plain text
