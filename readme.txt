@@ -46,6 +46,13 @@ If this kit has any specific feature it will be listed in the product descriptio
 == Screenshots ==
 
 == Changelog ==
+v1.3
+Return address now set to user's address, not your own as defaulted by Wordpress
+Now sends mail as HTML, not plain text
+
+v1.2
+Updated to match Unity's new record structure
+
 v1.1
 Now not only verifies the invoice before sending the form but also sends the invoice number and your products on the invoice in the email also so you can verify the product in question is actually on the invoice.
 The initial release also didn't include the name field from the contact form. That has been fixed. All fields are now returned.

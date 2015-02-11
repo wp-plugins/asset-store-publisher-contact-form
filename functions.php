@@ -77,6 +77,10 @@ function as_validate_form($invoice, $name, $email, $subject, &$message)
 	if (empty($subject)) return "Subject is required";
 	if (empty($message)) return "Message is required";
 	if (!is_email($email)) return "Email address is not valid";
+	$message = "<p><strong>Product support request from $name [ $email ]:</strong></p><p>$message</p>";
+
+	if (isset($_POST['skip'])) return "";
+	
 	if (empty($invoice)) return "Please supply a valid invoice number(s) for the product(s) you require assistance with";
 	
 	$invoice = str_replace(' ','',$invoice);
@@ -85,17 +89,18 @@ function as_validate_form($invoice, $name, $email, $subject, &$message)
 
 	$invoices = new unity_invoices();
 	$invoices->validate_invoices($invoice);
-//	if ($invoices->validated_invoices_count() < $invoice_count) return "One or more invoices were incorrect";
+//	if ($invoices->validated_invoices_count() != $invoice_count) return "One or more invoices were incorrect";
 	foreach($invoices->validated_invoices as $valid_invoice)
 		if ($valid_invoice->refunded) return "Invoice {$valid_invoice->invoice} was refunded!";
-		
-	$message = "$name [ $email ] said:\n\n$message\n\nValid invoices / products provided:";
+
+	$message .= "<h3><u>Valid invoices / products provided:</u></h3><p>";
 
 	foreach($invoices->validated_invoices as $valid_invoice)
 	{
-		$message .= "\n$valid_invoice->invoice: ";
-		$message .= $valid_invoice->package . "\n";
+		$message .= "$valid_invoice->invoice: ";
+		$message .= $valid_invoice->package . "<br>";
 	}
+	$message .= "</p>";
 	return '';
 }
 function as_send_contact_form($invoice, $name, $email, $subject, $message, $form_email)
@@ -108,7 +113,7 @@ function as_send_contact_form($invoice, $name, $email, $subject, $message, $form
 	
 	$error = as_validate_form($invoice, $name, $email, $subject, $message);
 	if (!empty($error)) return $error;
-	if (!wp_mail($form_email, $subject, $message) ) return "The e-mail could not be sent";
+	if (!wp_mail($form_email, $subject, $message, array("From: $email", 'Content-Type: text/html; charset=UTF-8') ) ) return "The e-mail could not be sent";
 	return "";
 }
 
