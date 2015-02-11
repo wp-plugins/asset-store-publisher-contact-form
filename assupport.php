@@ -6,7 +6,7 @@ session_start();
 Plugin Name: Asset Store Customer Support Form
 Plugin URI: http://theworldvirtual.com/development/asset-store-publisher-contact-form-plugin/
 Description: Allows Asset Store publishers to accept online customer support requests with automatic invoice validating beforehand
-Version: 1.0
+Version: 1.3
 Author: myBad Studios
 Author URI: http://www.mybadstudios.com
 */
